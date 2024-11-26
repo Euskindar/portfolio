@@ -1,17 +1,82 @@
+<!-- Documento de PORTFOLIO como muestra de habilidades HTML/CSS, además de práctica para emprendizaje REACT -->
+
 <!DOCTYPE html>
+
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Julen Perez - Portfolio</title>
+    <title>Julen Pérez</title>
+    <link rel="stylesheet" href="portfolio.css" />
+    <script src="script.js"></script>
   </head>
-  <header>
-    <h1>ESTO ES EL HEADER</h1>
-  </header>
+
+  <!-- Cuerpo de la pagina -->
   <body>
-    <div>ESTO ES EL BODY</div>
+    <!-- Cabecero fijo para navegacion fluida -->
+    <header>
+      <h1>Mi Portafolio</h1>
+      <nav>
+        <ul>
+          <li><a href="#sobre-mi">Sobre Mí</a></li>
+          <li><a href="#habilidades">Habilidades</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+      <!-- Seccion de descripcion -->
+      <section id="sobre-mi">
+        <h2>Sobre Mí</h2>
+        <p>Descripción breve sobre ti.</p>
+      </section>
+
+      <!-- Seccion de SKILLS -->
+      <section id="habilidades">
+        <h2>Habilidades</h2>
+        <ul>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <!-- Añade más habilidades -->
+        </ul>
+      </section>
+
+      <!-- Seccion de PROYECTOS realizados -->
+      <section id="proyectos">
+        <h2>Proyectos</h2>
+        <div class="proyecto">
+          <h3>Proyecto 1</h3>
+          <p>Descripción del proyecto.</p>
+        </div>
+        <!-- Añade más proyectos -->
+      </section>
+
+      <!-- Seccion para contactar conmigo -->
+      <section id="contacto">
+        <h2>Contacto</h2>
+        <!-- <div> Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a></div> -->
+        <div class="nombre"><img src="" alt="" id="ID_1" /></div>
+        <div class="nombre"><img src="" alt="" id="ID_2" /></div>
+        <div class="nombre"><img src="" alt="" id="ID_3" /></div>
+      </section>
+    </main>
   </body>
+
+  <!-- Pie de pagina para creditos y licencias -->
   <footer>
-    <div>ESTO ES EL FOOTER</div>
+    <section>
+      <h2>Licencias</h2>
+      <!-- Poner todas las licencias y demas en formato de "patrocinadores" en la parte inferior -->
+
+      <!-- TO DO -->
+      <!-- Agregar icono de Flaticon, con el enlace a la pagina y descripicon en el HOVER -->
+      <a href="https://www.flaticon.com/free-icons/email" title="email icons">
+        Icons created by Freepik - Flaticon
+      </a>
+    </section>
   </footer>
 </html>
