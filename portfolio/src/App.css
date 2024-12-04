@@ -12,10 +12,10 @@
 /* Estilos básicos para el botón, incluyendo apariencia, colores y tipografía */
 .btn-30 {
   -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: button;
-  background-color: #000;
+  /* -webkit-appearance: button; */
+  background-color: #ffffff;
   background-image: none;
-  color: #fff;
+  color: #ffffff; /* Color en negativo, se invierte */
   cursor: pointer;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
@@ -24,9 +24,10 @@
   font-weight: 900;
   line-height: 1.5;
   margin: 0;
-  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  /* -webkit-mask-image: -webkit-radial-gradient(#000, #fff); */
   padding: 0;
   text-transform: uppercase;
+  
 }
 
 /* Estilo del botón cuando está deshabilitado */
@@ -42,7 +43,7 @@
 /* Ajustes específicos para SVGs dentro del botón */
 .btn-30 svg {
   display: block;
-  vertical-align: middle;
+  /* vertical-align: middle; */
 }
 
 /* Estilo para elementos ocultos dentro del botón */
@@ -67,7 +68,7 @@
 /* Estilo inicial y animación para el efecto de expansión en :before */
 .btn-30:before {
   aspect-ratio: 1;
-  background: #fff;
+  background: #000000;
   border-radius: 50%;
   content: "";
   height: 0;
