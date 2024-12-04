@@ -1,42 +1,132 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Estilos generales y ajuste de box-sizing para el botón y sus pseudoelementos */
+.btn-30,
+.btn-30 *,
+.btn-30 :after,
+.btn-30 :before,
+.btn-30:after,
+.btn-30:before {
+  border: 0 solid;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Estilos básicos para el botón, incluyendo apariencia, colores y tipografía */
+.btn-30 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #000;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  font-weight: 900;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+  text-transform: uppercase;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Estilo del botón cuando está deshabilitado */
+.btn-30:disabled {
+  cursor: default;
+}
+
+/* Estilo del botón enfocado en Firefox */
+.btn-30:-moz-focusring {
+  outline: auto;
+}
+
+/* Ajustes específicos para SVGs dentro del botón */
+.btn-30 svg {
+  display: block;
+  vertical-align: middle;
+}
+
+/* Estilo para elementos ocultos dentro del botón */
+.btn-30 [hidden] {
+  display: none;
+}
+
+/* Estilos adicionales para la forma y el relleno del botón */
+.btn-30 {
+  border-radius: 999px;
+  border-width: 1px;
+  overflow: hidden;
+  padding: 1rem 2rem;
+  position: relative;
+}
+
+/* Ajuste del modo de mezcla para el texto del botón */
+.btn-30 span {
+  mix-blend-mode: difference;
+}
+
+/* Estilo inicial y animación para el efecto de expansión en :before */
+.btn-30:before {
+  aspect-ratio: 1;
+  background: #fff;
+  border-radius: 50%;
+  content: "";
+  height: 0;
+  left: 50%;
+  position: absolute;
+  top: -200%;
+  transform: translateX(-50%);
+  transition: height 0.3s;
+}
+
+.btn-30:hover:before {
+  height: 400%;
+}
+
+/* Contenedor y animación del texto dentro del botón */
+.btn-30 .text-container {
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-30 .text {
+  display: block;
+  mix-blend-mode: difference;
+  position: relative;
+}
+
+.btn-30:hover .text {
+  -webkit-animation: move-up-alternate 0.3s ease forwards;
+  animation: move-up-alternate 0.3s ease forwards;
+}
+
+/* Definición de keyframes para la animación del texto */
+@-webkit-keyframes move-up-alternate {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(80%);
+  }
+  51% {
+    transform: translateY(-80%);
   }
   to {
-    transform: rotate(360deg);
+    transform: translateY(0);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@keyframes move-up-alternate {
+  0% {
+    transform: translateY(0);
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  50% {
+    transform: translateY(80%);
+  }
+  51% {
+    transform: translateY(-80%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
