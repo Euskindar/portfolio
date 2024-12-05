@@ -7,22 +7,22 @@ function App() {
     <>
       <TwitterFollowCard
         userName="midudev"
-        user="Pepito DURAN"
+        user="MIGE ANGEL UWU"
         isFollowed={false}
       />
       <TwitterFollowCard
-        userName="midudev"
-        user="Pepito DURAN"
+        userName="pheralb"
+        user="PABLITO COMUINICA"
         isFollowed={false}
       />
       <TwitterFollowCard
-        userName="midudev"
-        user="Pepito DURAN"
+        userName="elonmusk"
+        user="EL RICACHUELO DEL PUEBLO"
         isFollowed={false}
       />
       <TwitterFollowCard
-        userName="midudev"
-        user="Pepito DURAN"
+        userName="vxnder"
+        user="VAnder de Arcane"
         isFollowed={false}
       />
     </>

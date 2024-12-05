@@ -29,7 +29,7 @@
   line-height: 1.5;
   margin: 0;
   /* -webkit-mask-image: -webkit-radial-gradient(#000, #fff); */
-  padding: 0;
+  padding: 0.5rem 1rem; /* Mantén el padding constante */
   text-transform: uppercase;
 }
 
@@ -59,7 +59,7 @@
   border-radius: 999px;
   border-width: 1px;
   overflow: hidden;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1.5rem;
   position: relative;
 }
 
@@ -145,6 +145,7 @@
   align-items: center;
   color: #ffffff;
   font-size: 0.8rem;
+  justify-content: space-between;
 }
 
 /* Estilos para el header */

@@ -26,7 +26,7 @@ export function TwitterFollowCard({ userName, user }) {
         </div>
       </header>
 
-      <aside>
+      <aside className="tw-asideButton">
         <button className="btn-followAnimado" onClick={handleFollowClick}>
           <span className="text-container">
             <span className="text">{isFollowed ? "No seguir" : "Seguir"}</span>
