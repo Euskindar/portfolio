@@ -1,16 +1,20 @@
+/* /////////////////////////////////////////////////////////////////////////// */
+/* ESTILOS PARA EL BOTON DE SEGUIR */
+/* /////////////////////////////////////////////////////////////////////////// */
+
 /* Estilos generales y ajuste de box-sizing para el botón y sus pseudoelementos */
-.btn-30,
-.btn-30 *,
-.btn-30 :after,
-.btn-30 :before,
-.btn-30:after,
-.btn-30:before {
+.btn-followAnimado,
+.btn-followAnimado *,
+.btn-followAnimado :after,
+.btn-followAnimado :before,
+.btn-followAnimado :after,
+.btn-followAnimado :before {
   border: 0 solid;
   box-sizing: border-box;
 }
 
 /* Estilos básicos para el botón, incluyendo apariencia, colores y tipografía */
-.btn-30 {
+.btn-followAnimado {
   -webkit-tap-highlight-color: transparent;
   /* -webkit-appearance: button; */
   background-color: #ffffff;
@@ -27,32 +31,31 @@
   /* -webkit-mask-image: -webkit-radial-gradient(#000, #fff); */
   padding: 0;
   text-transform: uppercase;
-  
 }
 
 /* Estilo del botón cuando está deshabilitado */
-.btn-30:disabled {
+.btn-followAnimado:disabled {
   cursor: default;
 }
 
 /* Estilo del botón enfocado en Firefox */
-.btn-30:-moz-focusring {
+.btn-followAnimado:-moz-focusring {
   outline: auto;
 }
 
 /* Ajustes específicos para SVGs dentro del botón */
-.btn-30 svg {
+.btn-followAnimado svg {
   display: block;
   /* vertical-align: middle; */
 }
 
 /* Estilo para elementos ocultos dentro del botón */
-.btn-30 [hidden] {
+.btn-followAnimado [hidden] {
   display: none;
 }
 
 /* Estilos adicionales para la forma y el relleno del botón */
-.btn-30 {
+.btn-followAnimado {
   border-radius: 999px;
   border-width: 1px;
   overflow: hidden;
@@ -61,12 +64,12 @@
 }
 
 /* Ajuste del modo de mezcla para el texto del botón */
-.btn-30 span {
+.btn-followAnimado span {
   mix-blend-mode: difference;
 }
 
 /* Estilo inicial y animación para el efecto de expansión en :before */
-.btn-30:before {
+.btn-followAnimado:before {
   aspect-ratio: 1;
   background: #000000;
   border-radius: 50%;
@@ -79,24 +82,24 @@
   transition: height 0.3s;
 }
 
-.btn-30:hover:before {
+.btn-followAnimado:hover:before {
   height: 400%;
 }
 
 /* Contenedor y animación del texto dentro del botón */
-.btn-30 .text-container {
+.btn-followAnimado .text-container {
   display: block;
   overflow: hidden;
   position: relative;
 }
 
-.btn-30 .text {
+.btn-followAnimado .text {
   display: block;
   mix-blend-mode: difference;
   position: relative;
 }
 
-.btn-30:hover .text {
+.btn-followAnimado:hover .text {
   -webkit-animation: move-up-alternate 0.3s ease forwards;
   animation: move-up-alternate 0.3s ease forwards;
 }
@@ -130,4 +133,41 @@
   to {
     transform: translateY(0);
   }
+}
+
+/* /////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////// */
+/* /////////////////////////////////////////////////////////////////////////// */
+
+/* Estilos para Article general */
+.tw-followCard {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  font-size: 0.8rem;
+}
+
+/* Estilos para el header */
+.tw-followCard-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Estilos para el icono de usuario */
+.tw-followCard-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 1000px;
+}
+
+/* Estilos para el nombre de usuario */
+.tw-followCard-info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilos para el texto de la tarjeta */
+.tw-followCard-infoUser {
+  opacity: 0.6;
 }

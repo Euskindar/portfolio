@@ -1,25 +1,31 @@
 // Importa los estilos CSS
 import "./App.css";
+import { TwitterFollowCard } from "./TwitterCardComponent";
 
 function App() {
   return (
-    <article>
-      <header>
-        <img src=".\src\assets\react.svg" alt="icono de noseque de Twitter" />
-        <div>
-          <strong>Papito Perez</strong>
-          <span>@PepitoPe</span>
-        </div>
-      </header>
-
-      <aside>
-        <button className="btn-30">
-          <span className="text-container">
-            <span className="text">Seguir</span>
-          </span>
-        </button>
-      </aside>
-    </article>
+    <>
+      <TwitterFollowCard
+        userName="midudev"
+        user="Pepito DURAN"
+        isFollowed={false}
+      />
+      <TwitterFollowCard
+        userName="midudev"
+        user="Pepito DURAN"
+        isFollowed={false}
+      />
+      <TwitterFollowCard
+        userName="midudev"
+        user="Pepito DURAN"
+        isFollowed={false}
+      />
+      <TwitterFollowCard
+        userName="midudev"
+        user="Pepito DURAN"
+        isFollowed={false}
+      />
+    </>
   );
 }
 
