@@ -2920,6 +2920,7 @@ body.is-touch .tiles article .content {
   position: sticky;
   top: 0;
   overflow: hidden;
+  z-index: 999;
 }
 
 #header .logo {
