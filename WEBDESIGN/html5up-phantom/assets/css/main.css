@@ -1,6 +1,7 @@
 @import url(fontawesome-all.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700,900");
 
+/* Estilos principales para los elementos base */
 html,
 body,
 div,
@@ -154,14 +155,14 @@ textarea {
   appearance: none;
 }
 
-/* Basic */
+/* Estilos generales */
 
 @-ms-viewport {
   width: device-width;
 }
 
 body {
-  -ms-overflow-style: scrollbar;
+  -ms-overflow-style: auto;
 }
 
 @media screen and (max-width: 480px) {
@@ -198,7 +199,7 @@ body.is-preload *:after {
   transition: none !important;
 }
 
-/* Type */
+/* Estilos de textos */
 
 body,
 input,
@@ -210,6 +211,8 @@ textarea {
   font-weight: 300;
   line-height: 1.75;
 }
+
+/* Estilos para las tarjetas dependiendo de anchura y altura de pantalla */
 
 @media screen and (max-width: 1680px) {
   body,
@@ -409,7 +412,7 @@ hr.major {
   text-align: right;
 }
 
-/* Row */
+/* Estilos de FILAS / ROWS */
 
 .row {
   display: flex;
@@ -1867,7 +1870,7 @@ hr.major {
   }
 }
 
-/* Section/Article */
+/* Estilos de Section/Article */
 
 section.special,
 article.special {
@@ -1884,7 +1887,7 @@ header p {
   }
 }
 
-/* Icon */
+/* Estilos para los Icon */
 
 .icon {
   text-decoration: none;
@@ -1954,7 +1957,7 @@ header p {
   background-color: rgba(242, 132, 158, 0.1);
 }
 
-/* List */
+/* Estilos para las List */
 
 ol {
   list-style: decimal;
@@ -2005,7 +2008,7 @@ dl dd {
   margin-left: 2em;
 }
 
-/* Actions */
+/* Estilos para los Actions en lista */
 
 ul.actions {
   display: -moz-flex;
@@ -2125,7 +2128,7 @@ ul.actions.fit.stacked {
   }
 }
 
-/* Icons */
+/* Estilos de Icons en lista */
 
 ul.icons {
   cursor: default;
@@ -2139,7 +2142,7 @@ ul.icons li {
   padding: 1em 0 0 1em;
 }
 
-/* Form */
+/* Estilos de Form */
 
 form {
   margin: 0 0 2em 0;
@@ -2373,7 +2376,7 @@ input[type="radio"] + label:before {
   border-radius: 100%;
 }
 
-/* Box */
+/* Estilos de Box */
 
 .box {
   border-radius: 4px;
@@ -2394,7 +2397,7 @@ input[type="radio"] + label:before {
   padding: 0;
 }
 
-/* Image */
+/* Estilos de Image */
 
 .image {
   border-radius: 4px;
@@ -2456,7 +2459,7 @@ input[type="radio"] + label:before {
   }
 }
 
-/* Table */
+/* Estilos de Table */
 
 .table-wrapper {
   -webkit-overflow-scrolling: touch;
@@ -2523,7 +2526,7 @@ table.alt tfoot {
   border-top: 0;
 }
 
-/* Button */
+/* Estilos de Button */
 
 input[type="submit"],
 input[type="reset"],
@@ -2652,7 +2655,7 @@ button:disabled,
   opacity: 0.25;
 }
 
-/* Tiles */
+/* Estilos de las Tiles */
 
 .tiles {
   display: -moz-flex;
@@ -2909,10 +2912,14 @@ body.is-touch .tiles article .content {
   }
 }
 
-/* Header */
+/* Estilos de Header */
 
 #header {
   padding: 8em 0 0.1em 0;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
 }
 
 #header .logo {
