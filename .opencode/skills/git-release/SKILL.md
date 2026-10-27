@@ -17,7 +17,7 @@ Prepare a release proposal without changing the repository: inspect merged chang
 
 - Work from the repository root.
 - Read the repository's `AGENTS.md`; its safety rules apply. Do not install dependencies, create builds, start servers, or delete files as part of this skill unless asked.
-- Check `git --version` and `gh --version`; run `gh auth status` if needed. If git/gh is missing or `gh` is unauthenticated, stop and ask the user to run the commands or provide the data. Never invent tags, PRs, authors, or dates.
+- Check `git --version` and `gh --version`, then run `gh auth status`. On Git Bash for Windows, if `gh` is not on PATH, try `/c/Program Files/GitHub CLI/gh.exe` before concluding it is missing. If git/gh is still unavailable or `gh` is unauthenticated, stop and ask the user to run the commands or provide the data. Never run `gh auth token` or print credentials, and never invent tags, PRs, authors, or dates.
 - Read-only inspection is fine. Tag creation, pushes, release creation, and version-file edits change shared state; ask for explicit confirmation before doing them.
 
 ## Workflow

@@ -12,6 +12,17 @@
 - Do not delete files or folders without confirmation.
 - Do not install dependencies without asking.
 - Do not perform irreversible actions without confirmation.
+- Default to proposing actions, not executing them. When in doubt, stop and ask.
+
+## Git and GitHub
+
+`git` and the GitHub CLI (`gh`) are available and `gh` is authenticated. In this environment `gh` is not on the shell PATH; use `/c/Program Files/GitHub CLI/gh.exe` (Git Bash for Windows) or add it to PATH. Verify with `gh auth status`.
+
+- Read-only inspection is allowed when it helps answer the request: `git status`, `git log`, `git diff`, `git show`, `gh pr list/view`, `gh release list/view`, `gh auth status`.
+- Before any command that changes local or remote state — `git add`, `git commit`, `git push`, `git tag`, `git reset`, `git branch -d`, `gh release create`, `gh pr merge`, `gh repo edit`, or a write-method `gh api` call — show the exact command and wait for explicit approval. Approval applies to that command only; confirm later steps separately.
+- Never run `gh auth token` or print credentials. Do not put tokens in files, commits, or chat.
+- Never force-push, rewrite published history, delete remote branches or tags, or change repository visibility or settings without explicit confirmation naming the target.
+- If `gh` is unauthenticated or a command fails, report the error and give the user the exact command to run. Do not invent output or retry destructive commands.
 
 ## Commands (run from the repository root)
 
