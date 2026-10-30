@@ -3,6 +3,12 @@ import { useState } from "react";
 
 import PropTypes from "prop-types";
 
+/**
+ * Tarjeta de seguimiento estilo X.
+ * El estado "Seguir"/"No seguir" es interno de cada tarjeta (useState);
+ * la prop `isFollowed` que envía App.jsx no se lee aquí.
+ * El avatar se carga en runtime desde https://unavatar.io/<userName>.
+ */
 export function TwitterFollowCard({ userName, user }) {
   // useState para controlar el estado de seguimiento
   const [isFollowed, setIsFollowed] = useState(false);
@@ -37,7 +43,7 @@ export function TwitterFollowCard({ userName, user }) {
   );
 }
 
-// Validaciones para comprobar que los parametros son pasados y sus tipos
+// Validaciones para comprobar que los parámetros son pasados y sus tipos
 TwitterFollowCard.propTypes = {
   userName: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
