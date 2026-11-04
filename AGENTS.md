@@ -93,4 +93,4 @@ Use the `git-release` skill (`.opencode/skills/git-release/SKILL.md`) to draft r
 - Keep user-facing text and code comments in Spanish; this is a Spanish-language portfolio.
 - `App.jsx` is the single page shell. There is no router, data layer, or backend; add one only when the portfolio needs it, and document the change in `docs/architecture.md`.
 - Define visual decisions in `DESIGN.md` and expose them as CSS custom properties in `src/index.css`; do not scatter literal colors or font stacks.
-- The reset removed the demo components, `dist/`, `docs/security.md`, and the inherited C++ VS Code task. Do not reintroduce them.
+- Do not reintroduce demo components, committed build output, or unrelated editor tasks.
