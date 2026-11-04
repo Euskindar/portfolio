@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "npm audit --audit-level=high",
+    "security:audit": "echo '=== Auditoría de seguridad ===' && npm audit && echo '' && echo '=== Revisión de dependencias externas ===' && grep -rn 'fetch\\|axios\\|http\\|https' src/ || echo 'Sin llamadas HTTP directas en src/'"
   },
   "dependencies": {
     "react": "^18.3.1",

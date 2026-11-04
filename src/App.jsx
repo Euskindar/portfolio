@@ -1,33 +1,35 @@
-// Importa los estilos CSS
-import "./App.css";
-import { TwitterFollowCard } from "./TwitterCardComponent";
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
 function App() {
+  const [count, setCount] = useState(0)
+
   return (
     <>
-      <TwitterFollowCard
-        userName="midudev"
-        user="MIGE ANGEL UWU"
-        isFollowed={false}
-      />
-      <TwitterFollowCard
-        userName="pheralb"
-        user="PABLITO COMUINICA"
-        isFollowed={false}
-      />
-      <TwitterFollowCard
-        userName="elonmusk"
-        user="EL RICACHUELO DEL PUEBLO"
-        isFollowed={false}
-      />
-      <TwitterFollowCard
-        userName="vxnder"
-        user="VAnder de Arcane"
-        isFollowed={false}
-      />
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
     </>
-  );
+  )
 }
 
-// Exporta el componente App como el componente predeterminado
-export default App;
+export default App

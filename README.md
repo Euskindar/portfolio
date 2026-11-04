@@ -1,13 +1,13 @@
 # Portfolio
 
-A small, client-only portfolio built with React and Vite. It renders a set of X/Twitter-style follow cards with a local follow toggle.
+Personal portfolio built with React 18 and Vite 6. The project is reset to a clean Vite scaffold; the visual work starts from scratch.
 
 ## Stack
 
-- React 18
+- React 18 (`react`, `react-dom` 18.3.1)
 - Vite 6 with `@vitejs/plugin-react-swc`
 - Plain JavaScript/JSX (no TypeScript)
-- ESLint 9
+- ESLint 9 (flat config)
 
 ## Getting started
 
@@ -22,41 +22,18 @@ The dev server prints the local URL.
 
 | Command | Purpose |
 | --- | --- |
-| `npm run dev` | Start the Vite dev server |
-| `npm run lint` | Run ESLint over JS/JSX |
-| `npm run build` | Build the production bundle into `dist/` |
-| `npm run preview` | Serve the production build locally |
+| `npm run dev` | Vite dev server with HMR |
+| `npm run build` | Production build into `dist/` |
+| `npm run lint` | ESLint over JS/JSX |
+| `npm run preview` | Serve the production build |
+| `npm run security:audit` | Dependency audit plus a quick scan for external HTTP calls |
 
-There is no test suite yet; see [`docs/testing.md`](docs/testing.md).
+`npm install` runs `npm audit` as a `postinstall` hook.
 
-## Layout
+## Design workflow
 
-```text
-.
-├── AGENTS.md
-├── docs/
-├── public/
-├── src/
-│   ├── main.jsx
-│   ├── App.jsx
-│   ├── TwitterCardComponent.jsx
-│   ├── App.css
-│   └── index.css
-├── index.html
-├── package.json
-├── vite.config.js
-└── eslint.config.js
-```
+`PRODUCT.md` (product truth) and `DESIGN.md` (tokens, type, components) live at the repository root and are versioned. Before building a new surface, run `/impeccable init` and `/impeccable shape`; before committing UI changes, run `/design-review` plus `/code-review` and `/security-review`.
 
 ## Documentation
 
-- [Architecture](docs/architecture.md)
-- [Testing](docs/testing.md)
-- [Styles](docs/styles.md)
-- [Build and deploy](docs/deploy.md)
-
-## Notes
-
-- Avatars are loaded at runtime from `https://unavatar.io/<userName>`.
-- Follow state is local to each card; there is no backend or persistence.
-- The follow button is intentionally animated and styled in `src/App.css`.
+`docs/` contains the living notes on architecture, testing, styles, and deploy.

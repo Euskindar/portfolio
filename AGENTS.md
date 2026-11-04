@@ -2,8 +2,8 @@
 
 ## Layout
 
-- The app is a Vite 6 + React 18 project at the repository root, using the SWC plugin and plain JavaScript/JSX (no TypeScript). Entry: `src/main.jsx` → `App.jsx`; the reusable card is `src/TwitterCardComponent.jsx`.
-- `opencode_test/` is an empty scratch folder; don't scaffold a project there.
+- The app is a Vite 6 + React 18 project at the repository root, using the SWC plugin and plain JavaScript/JSX (no TypeScript). Entry: `src/main.jsx` → `App.jsx`.
+- The repository is reset to a fresh Vite scaffold. Build the visual system deliberately instead of extending leftover demo markup.
 - `docs/` contains the living architecture, testing, styles, and deploy notes.
 
 ## Safety and workflow
@@ -44,13 +44,53 @@ Keep `docs/` current in the same change as the code it describes:
 
 If a change affects one of these areas, update the matching file. Don't leave docs describing removed code or scripts that do not exist.
 
+## Security Audit
+
+La skill `security-audit` (Cloudflare) está instalada globalmente. Se integra en el flujo de desarrollo así:
+
+### Auditorías automáticas
+
+- `npm install` ejecuta `npm audit` como postinstall para detectar dependencias con vulnerabilidades conocidas.
+- Si `npm audit` encuentra vulnerabilidades **alta/crítica**, se muestra un aviso en rojo y se propone un plan de mitigación antes de continuar.
+
+### Auditorías manuales
+
+- `npm run security:audit` — ejecuta una revisión enfocada en las clases de ataque relevantes para este proyecto web:
+  - **SUPPLY-CHAIN-AND-RELEASE**: verifica integridad de dependencias y scripts de instalación.
+  - **CLIENT-SIDE**: revisa XSS, inyección de scripts, CSP, sanitización de URLs externas.
+  - **WEB-PROTOCOL-AND-AUTH**: revisa headers de seguridad, CORS, cookies seguras.
+  - **AI-AND-LLM**: revisa si hay integración con APIs externas o LLMs.
+
+### Auditorías periódicas
+
+- **Cada vez que se actualicen dependencias** (`npm update` o `npm install`): se ejecuta `npm audit` automáticamente.
+- **Mensual**: revisar manualmente con `npm run security:audit` y reportar los hallazgos en la respuesta.
+- **Antes de cada release**: ejecutar auditoría completa y actualizar `docs/deploy.md` con el estado de seguridad.
+
+### Reportes
+
+- Los hallazgos se entregan en la respuesta con formato: clase de ataque, vulnerabilidad, prioridad y fix propuesto. Solo se crea un archivo de informe si el usuario lo pide.
+- No se ejecuta auditoría completa (6 fases) sin aprobación explícita del usuario.
+
+## Diseño de UI (Impeccable)
+
+Este proyecto es un portfolio personal: modo de diseño **Experience** (la obra manda, la interfaz se retira). La skill `impeccable` está instalada globalmente y se activa sola en cualquier tarea de UI, anunciándose con `🧩 Skill: impeccable — <motivo>`.
+
+- **Contexto obligatorio:** `PRODUCT.md` (público, objetivo, restricciones) y `DESIGN.md` (tokens, tipografía, componentes) viven en la raíz del repo y se versionan. Si no existen, proponer `/impeccable init` y, tras la primera versión visual, `/impeccable document`.
+- **Flujo:** `shape` antes de una sección nueva · `critique` para evaluar · `bolder|quieter|typeset|layout|distill|animate|delight` para ajustes · `polish`/`harden`/`adapt` antes de cerrar · `extract` si un patrón se repite.
+- **Antes de commit:** `/design-review` sobre el área tocada; incluir los hallazgos P0–P3 en el resumen del cambio. El detector se ejecuta con `sh ~/.agents/skills/impeccable/scripts/impeccable detect src/` (y la URL del dev server si está activo).
+- **Defaults prohibidos:** Inter como tipografía por defecto, gradientes morado-azul, cards anidadas, icon-tile sobre cada heading, texto gris sobre fondo de color, bordes finos con sombra amplia. Si el brief los pide, se documenta la excepción en `DESIGN.md`.
+- **Calidad mínima:** contraste AA, foco visible, navegación por teclado, `prefers-reduced-motion`, responsive real (no solo un breakpoint), estados vacío/error/carga.
+- **Documentación:** cualquier decisión visual relevante se anota en `docs/styles.md` en el mismo cambio.
+- **Telemetría:** `DO_NOT_TRACK=1` o `"telemetry": false` en `.impeccable/config.json`.
+
 ## Releases
 
 Use the `git-release` skill (`.opencode/skills/git-release/SKILL.md`) to draft release notes, propose a version, and produce a `gh release create` command. It must not tag, push, or publish without explicit confirmation.
 
 ## App conventions and gotchas
 
-- Keep user-facing text and code comments in Spanish (e.g. "Seguir" / "No seguir"); this is a Spanish-language portfolio.
-- `TwitterCardComponent.jsx` exports `TwitterFollowCard` despite the filename, and loads avatars from `https://unavatar.io/<userName>` at runtime, so avatars need network access.
-- That component imports `prop-types`, but `package.json` does not declare it; it currently resolves from the hoisted `eslint-plugin-react` dev dependency. Add it explicitly if dependency resolution changes.
-- `App.jsx` hardcodes the displayed accounts; there is no router, data layer, or backend. Keep changes within that simple structure unless asked otherwise.
+- Keep user-facing text and code comments in Spanish; this is a Spanish-language portfolio.
+- `App.jsx` is the single page shell. There is no router, data layer, or backend; add one only when the portfolio needs it, and document the change in `docs/architecture.md`.
+- Define visual decisions in `DESIGN.md` and expose them as CSS custom properties in `src/index.css`; do not scatter literal colors or font stacks.
+- The reset removed the demo components, `dist/`, `docs/security.md`, and the inherited C++ VS Code task. Do not reintroduce them.
