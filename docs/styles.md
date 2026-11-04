@@ -22,5 +22,5 @@ The visual system is defined in `DESIGN.md` (palette, type scale, spacing, radii
 ## Gotchas
 
 - The scaffold's dark-first colors are placeholders, not a brand.
-- Keep user-facing strings and code comments in Spanish.
+- User-facing strings are bilingual ES/EN; code comments stay in Spanish.
 - Update this file whenever tokens, typography, breakpoints, or component classes change.

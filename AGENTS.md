@@ -90,7 +90,7 @@ Use the `git-release` skill (`.opencode/skills/git-release/SKILL.md`) to draft r
 
 ## App conventions and gotchas
 
-- Keep user-facing text and code comments in Spanish; this is a Spanish-language portfolio.
+- User-facing text is bilingual ES/EN; keep code comments in Spanish.
 - `App.jsx` is the single page shell. There is no router, data layer, or backend; add one only when the portfolio needs it, and document the change in `docs/architecture.md`.
 - Define visual decisions in `DESIGN.md` and expose them as CSS custom properties in `src/index.css`; do not scatter literal colors or font stacks.
 - Do not reintroduce demo components, committed build output, or unrelated editor tasks.
