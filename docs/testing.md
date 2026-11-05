@@ -55,4 +55,4 @@ Criterio de cierre: 0 hallazgos primarios en ambos pases. Los avisos (advisory) 
 1. Añadir el runner y un script `test` a `package.json`; actualizar el lockfile con `npm install`.
 2. Fijar una convención de ubicación (colocados junto al código o `src/__tests__/`) y documentarla aquí.
 3. Sustituir la frase «no hay tests» por el comando de la suite completa y de un fichero concreto.
-4. Actualizar `AGENTS.md` si cambia el orden de verificación obligatorio.
+4. Actualizar esta guía y `docs/architecture.md` si cambia el orden de verificación obligatorio.

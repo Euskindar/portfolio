@@ -23,6 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
+# Local agent and editor config (not shared)
+AGENTS.md
+.opencode/
+
 # Impeccable design artifacts (keep the shared config)
 .impeccable/*
 !.impeccable/config.json
