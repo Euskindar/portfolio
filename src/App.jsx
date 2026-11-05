@@ -95,12 +95,13 @@ export default function App() {
     copyTimer.current = setTimeout(() => setCopied(false), 2200)
   }
 
-  const head = (id, titleId) => ({
+  const head = (id, titleId, intro) => ({
     kicker: t[CONTENT_KEY[id]].kicker,
     hash: COMMIT_HASH[id],
     type: COMMIT_TYPE[id],
     titleId,
     title: t[CONTENT_KEY[id]].title,
+    intro,
   })
 
   return (
@@ -149,6 +150,7 @@ export default function App() {
                 </span>
               )}
             </div>
+            <p className="actions__hint">{t.hero.primaryHint}</p>
 
             <div className="hero__panels">
               <div className="panel">
@@ -195,7 +197,7 @@ export default function App() {
           </section>
 
           <section id="proyectos" className="section" aria-labelledby="proyectos-title">
-            <SectionHead {...head('proyectos', 'proyectos-title')} />
+            <SectionHead {...head('proyectos', 'proyectos-title', t.projects.intro)} />
             {t.projects.items.length ? (
               <div className="cases">
                 {t.projects.items.map((project) => (
@@ -265,6 +267,9 @@ export default function App() {
                 {copied ? t.contact.copied : t.contact.copy}
                 <span className="visually-hidden"> {links.email}</span>
               </button>
+              <span role="status" aria-live="polite" className="visually-hidden">
+                {copied ? t.contact.copied : ''}
+              </span>
             </div>
 
             <dl className="contact__list">
@@ -284,16 +289,18 @@ export default function App() {
                   </a>
                 </dd>
               </div>
-              {links.linkedin ? (
-                <div className="contact__row">
-                  <dt>{t.contact.linkedin}</dt>
-                  <dd>
+              <div className="contact__row">
+                <dt>{t.contact.linkedin}</dt>
+                <dd>
+                  {links.linkedin ? (
                     <a className="link" href={links.linkedin} target="_blank" rel="noreferrer">
                       LinkedIn <span aria-hidden="true">↗</span>
                     </a>
-                  </dd>
-                </div>
-              ) : null}
+                  ) : (
+                    <span className="contact__pending">{t.contact.linkedinPending}</span>
+                  )}
+                </dd>
+              </div>
               <div className="contact__row">
                 <dt>{t.contact.cv}</dt>
                 <dd>
@@ -302,7 +309,10 @@ export default function App() {
                       PDF
                     </a>
                   ) : (
-                    <span className="contact__pending">{t.contact.cvPending}</span>
+                    <span className="contact__pending">
+                      {t.contact.cvPending}
+                      <em className="contact__pending-note">{t.contact.cvPendingNote}</em>
+                    </span>
                   )}
                 </dd>
               </div>

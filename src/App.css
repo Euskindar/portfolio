@@ -219,6 +219,10 @@
   color: var(--ink-soft);
 }
 
+.commit:where([data-passed='true']:not([aria-current='true'])) .commit__msg {
+  color: var(--ink-soft);
+}
+
 .commit:hover .commit__msg,
 .commit[aria-current='true'] .commit__msg {
   color: var(--blue);
@@ -228,6 +232,20 @@
   box-shadow:
     0 0 0 3px var(--paper-sunk),
     0 0 0 5px rgba(36, 87, 214, 0.35);
+}
+
+/* Pista de la acción primaria, bajo los botones del hero */
+.actions__hint {
+  margin-top: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+}
+
+.actions__hint::before {
+  content: '· ';
+  color: var(--blue);
 }
 
 /* Hero ------------------------------------------------------------------- */
@@ -418,7 +436,7 @@
 
 .branches__note {
   margin-top: 0.3rem;
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   line-height: 1.45;
   color: var(--ink-soft);
 }
@@ -723,9 +741,18 @@
 }
 
 .contact__pending {
+  display: inline-block;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   color: var(--orange-ink);
+}
+
+.contact__pending-note {
+  display: block;
+  margin-top: 0.2rem;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
 }
 
 .link {

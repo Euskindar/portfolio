@@ -133,7 +133,7 @@ components:
 Tres roles semánticos, no decorativos. Un color aquí significa algo fijo en toda la superficie:
 
 - **Structure blue `#2457d6`** — el carril del grafo, los enlaces, la rama `main`, las rutas de fichero. Es la estructura del repositorio.
-- **Merge green `#2e7d5b`** — evidencia entregada: el nodo `fix`, las líneas `+` del diff y la acción primaria de contacto. Es el verde de «esto está fusionado».
+- **Merge green `#2e7d5b`** — evidencia entregada: un nodo de commit cuyo contenido ya está publicado, las líneas `+` del diff y la acción primaria de contacto. Es el verde de «esto está fusionado». Un commit de tipo `fix` que sigue pendiente usa naranja: el color codifica el estado, no el tipo.
 - **Attention orange `#d94f2b`** — el nodo de apertura y de release, y todo lo que falta. Para texto sobre papel se usa `attention-orange-ink #b03c1d`; el tono puro solo se emplea en nodos, badges y filetes de 1px, donde no hay que leerlo.
 
 **Neutros:** papel tintado `#f7f6f2` como suelo, hundido `#f2f0ea` para el rail y los estados pendientes, blanco `#ffffff` solo dentro de paneles. Tinta `#111111`; tres niveles de apoyo: `ink-dim #4c4f49`, `ink-soft #5a5d57`, `ink-faint #6b6e67`, todos ≥ 4.5:1 sobre papel. Las reglas son `#d7d5cd` y `#e2e0d8`.
@@ -146,7 +146,7 @@ Sin modo oscuro: el papel es una decisión, no un tema.
 
 Dos voces autoalojadas en `public/fonts/` (SIL OFL), sin peticiones a terceros:
 
-- **Archivo** (variable 400–800) es la voz de la prosa: titulares, cuerpo, microcopy. El hero va a 800 con tracking negativo fuerte; los H2 a 700 con −0.035em; el cuerpo nunca baja de 1rem.
+- **Archivo** (variable 400–800) es la voz de la prosa: titulares, cuerpo, microcopy. El hero va a 800 con tracking negativo fuerte; los H2 a 700 con −0.035em. La prosa de lectura va de 0.8125rem a 1.1875rem y ningún texto funcional baja de 11px.
 - **Azeret Mono** (400/500) es la voz del sistema: hashes, metadatos, chips, cabeceras de panel, líneas de diff, botones y etiquetas. Siempre en versalitas o con tracking amplio (`0.14em` etiquetas, `0.03em` código).
 
 Escala: `--text-h1` clamp 2.5→4.625rem, `--text-h2` clamp 1.75→2.75rem, `--text-lede` clamp 1.0625→1.1875rem, `--text-base` 1rem, `--text-xs` 0.6875rem (suelo absoluto: no hay texto funcional por debajo de 11px).

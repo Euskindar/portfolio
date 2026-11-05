@@ -51,7 +51,7 @@ export const content = {
     projects: {
       items: [],
       kicker: 'COMMIT 02 / RAMAS',
-      title: 'Trabajo seleccionado',
+      title: 'Proyectos',
       intro: 'Uno a tres casos, contados como diff: qué había, qué se decidió, qué se entregó.',
       empty: 'Todavía no hay casos catalogados',
       emptyNote:
@@ -97,6 +97,8 @@ export const content = {
       linkedin: 'LinkedIn',
       cv: 'CV en PDF',
       cvPending: 'Pendiente',
+      cvPendingNote: 'Falta subir el PDF',
+      linkedinPending: 'Perfil por enlazar',
       footer: 'Perfil híbrido de software y hardware. Contenido bilingüe, sin métricas inventadas.',
       backTop: 'Volver al inicio del historial',
     },
@@ -149,7 +151,7 @@ export const content = {
     projects: {
       items: [],
       kicker: 'COMMIT 02 / BRANCHES',
-      title: 'Selected work',
+      title: 'Projects',
       intro: 'One to three cases, told as a diff: what was there, what was decided, what shipped.',
       empty: 'No cases catalogued yet',
       emptyNote:
@@ -195,6 +197,8 @@ export const content = {
       linkedin: 'LinkedIn',
       cv: 'CV (PDF)',
       cvPending: 'Pending',
+      cvPendingNote: 'PDF not uploaded yet',
+      linkedinPending: 'Profile not linked yet',
       footer: 'Hybrid software and hardware profile. Bilingual content, no invented metrics.',
       backTop: 'Back to the top of the history',
     },
@@ -214,7 +218,7 @@ export const links = {
 export const sections = [
   { id: 'perfil', hash: 'a1f9c2e', type: 'feat', node: 'orange' },
   { id: 'proyectos', hash: 'b7d41aa', type: 'feat', node: 'blue' },
-  { id: 'experiencia', hash: 'c2e8f10', type: 'fix', node: 'green' },
+  { id: 'experiencia', hash: 'c2e8f10', type: 'fix', node: 'orange' },
   { id: 'stack', hash: 'd9a03b4', type: 'chore', node: 'blue' },
   { id: 'sobre-mi', hash: 'e4c76d1', type: 'docs', node: 'gray' },
   { id: 'contacto', hash: 'f0b12c8', type: 'release', node: 'orange' },
