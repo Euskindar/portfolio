@@ -2,44 +2,57 @@
 
 ## Current state
 
-There is no automated test suite, test runner, or `test` script. `package.json` exposes `dev`, `build`, `lint`, `preview`, `postinstall`, and `security:audit`.
+No hay suite automatizada, runner ni script `test`. `package.json` expone `dev`, `build`, `lint`, `preview`, `postinstall` y `security:audit`.
+
+Las comprobaciones reales de esta superficie son: lint, build, detector de UI contra el navegador y smoke test manual. No afirmar que «los tests pasan»: no existen.
 
 ## Standard checks
 
-Run these from the repository root:
+Desde la raíz del repositorio:
 
 ```bash
-npm install       # installs dependencies; postinstall runs npm audit
-npm run lint      # ESLint 9, JS/JSX only, ignores dist
-npm run build     # production build; catches import and bundling errors
+npm run lint      # ESLint 9, JS/JSX, ignora dist
+npm run build     # build de producción; detecta imports y bundling
 ```
 
-For a focused lint run: `npx eslint src/App.jsx`.
+Lint focalizado: `npx eslint src/App.jsx`.
 
-Do not claim that tests pass: there are none.
+## Smoke test manual
 
-## Manual smoke test
+Con `npm run dev`, verificar:
 
-Run `npm run dev` and verify:
-
-- The default Vite + React page renders without console errors.
-- The layout is usable at 320px width and on a normal desktop viewport.
-- Toggle the OS light/dark mode and check that text remains readable.
-- Keyboard navigation reaches every interactive element with a visible focus ring.
+- La home carga sin errores de consola y muestra la barra, el rail y las seis secciones.
+- El rail marca la sección visible (`aria-current`) y el carril se rellena al hacer scroll.
+- El conmutador ES/EN cambia todo el texto, `document.title` y `document.documentElement.lang`; la preferencia persiste al recargar.
+- `?lang=en` abre la versión inglesa sin depender de `localStorage`.
+- Hover de botones/enlaces y foco de teclado visibles en todos los interactivos.
+- Copiar email funciona (con fallback si `navigator.clipboard` no está disponible) y el texto vuelve a «Copiar dirección» tras ~2 s.
+- LinkedIn y CV se muestran como pendientes cuando `links` está vacío.
+- Sin scroll horizontal de 360px a 1440px+.
+- `prefers-reduced-motion` desactiva scroll suave y animaciones.
 
 ## UI review gate
 
-Before committing visible UI changes, run `/design-review` and include the P0–P3 findings in the change summary. The deterministic detector runs with:
+Antes de commitear cambios visibles: `/design-review` y hallazgos P0–P3 en el resumen.
+
+El detector por ficheros (`detect src/`) **no cubre reglas de elemento** (tamaño de texto, viudas, contraste medido). Para eso, escanear el dev server por CDP:
 
 ```bash
-sh ~/.agents/skills/impeccable/scripts/impeccable detect src/
+# Arrancar Edge headless con depuración remota
+"/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe" \
+  --headless=new --disable-gpu --remote-debugging-port=9222 \
+  --remote-allow-origins=* --window-size=1440,900 "http://127.0.0.1:5173/"
+
+sh ~/.agents/skills/impeccable/scripts/impeccable detect --cdp 9222 --json
 ```
 
-Scan the running dev server URL as well when a browser is reachable; otherwise state that element-level rules did not run.
+Repetir con `--window-size=492,900` en otro puerto (`9223`) para el pase estrecho. Edge headless no baja de ~492px de ancho CSS; para 390px usar un iframe temporal y borrarlo antes de commitear.
+
+Criterio de cierre: 0 hallazgos primarios en ambos pases. Los avisos (advisory) no bloquean.
 
 ## When automated tests are added
 
-1. Add the runner and a `test` script to `package.json`, updating the lockfile with `npm install`.
-2. Establish a test location convention (colocated or `src/__tests__/`) and document it here.
-3. Replace the "no automated tests" statement above with the exact command for the full suite and for one test file.
-4. Update `AGENTS.md` if the required verification order changes.
+1. Añadir el runner y un script `test` a `package.json`; actualizar el lockfile con `npm install`.
+2. Fijar una convención de ubicación (colocados junto al código o `src/__tests__/`) y documentarla aquí.
+3. Sustituir la frase «no hay tests» por el comando de la suite completa y de un fichero concreto.
+4. Actualizar `AGENTS.md` si cambia el orden de verificación obligatorio.

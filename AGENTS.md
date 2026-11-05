@@ -3,7 +3,7 @@
 ## Layout
 
 - The app is a Vite 6 + React 18 project at the repository root, using the SWC plugin and plain JavaScript/JSX (no TypeScript). Entry: `src/main.jsx` → `App.jsx`.
-- The repository is reset to a fresh Vite scaffold. Build the visual system deliberately instead of extending leftover demo markup.
+- The home is already built: a single-surface «Commit Graph Ledger» (see `DESIGN.md` and `.impeccable/surfaces/src-app-jsx.md`). Extend it deliberately; do not reintroduce demo markup or restyle from scratch.
 - `docs/` contains the living architecture, testing, styles, and deploy notes.
 
 ## Safety and workflow
