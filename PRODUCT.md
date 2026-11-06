@@ -27,7 +27,7 @@ Perfil híbrido de desarrollo de software y soporte técnico de hardware: amplit
 
 ## Capabilities and Constraints
 
-- Aplicación web client-only: React 18 + Vite 6, JavaScript/JSX sin TypeScript.
+- Aplicación web client-only: React 19 + Vite 8, JavaScript/JSX sin TypeScript.
 - Sin backend, router, capa de datos ni persistencia todavía.
 - Contenido bilingüe ES/EN.
 - Evidencia disponible: CV, repositorios de GitHub y proyectos reales.

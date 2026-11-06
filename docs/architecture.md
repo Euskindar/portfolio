@@ -2,7 +2,7 @@
 
 ## Overview
 
-Aplicación React de una sola página, cliente puro, construida con Vite 6. No hay router, backend, capa de datos, estado global ni persistencia más allá de la preferencia de idioma en `localStorage`.
+Aplicación React de una sola página, cliente puro, construida con Vite 8. No hay router, backend, capa de datos, estado global ni persistencia más allá de la preferencia de idioma en `localStorage`.
 
 La home es una superficie única: un perfil de repositorio con seis secciones ancladas. Toda la navegación es intra-página.
 

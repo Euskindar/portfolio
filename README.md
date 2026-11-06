@@ -1,11 +1,11 @@
 # Portfolio
 
-Personal portfolio built with React 18 and Vite 6. The project is reset to a clean Vite scaffold; the visual work starts from scratch.
+Personal portfolio built with React 19 and Vite 8. The project is reset to a clean Vite scaffold; the visual work starts from scratch.
 
 ## Stack
 
-- React 18 (`react`, `react-dom` 18.3.1)
-- Vite 6 with `@vitejs/plugin-react-swc`
+- React 19 (`react`, `react-dom` 19.3.1)
+- Vite 8 with `@vitejs/plugin-react-swc`
 - Plain JavaScript/JSX (no TypeScript)
 - ESLint 9 (flat config)
 
