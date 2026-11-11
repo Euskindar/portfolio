@@ -8,6 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "test": "vitest",
+    "audit:a11y": "axe --input dist/index.html --output audit.json",
+    "gwd:audit": "cd ../modern-web-guidance && bash audit.sh http://localhost:5000",
     "postinstall": "npm audit --audit-level=high",
     "security:audit": "echo '=== Auditoría de seguridad ===' && npm audit && echo '' && echo '=== Revisión de dependencias externas ===' && grep -rn 'fetch\\|axios\\|http\\|https' src/ || echo 'Sin llamadas HTTP directas en src/'"
   },
@@ -17,14 +20,23 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react-refresh": "^1.3.6",
     "@vitejs/plugin-react-swc": "^4.3.3",
-    "eslint": "^9.15.0",
+    "core-js": "^3.51.0",
+    "esbuild": "^0.28.2",
+    "eslint": "^9.39.5",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.7",
     "globals": "^17.14.0",
-    "vite": "^8.3.6"
+    "jsdom": "^31.0.0",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.6",
+    "vite-plugin-pwa": "2.0.0",
+    "vitest": "^5.1.0"
   }
 }
