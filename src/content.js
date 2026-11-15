@@ -8,7 +8,7 @@ export const content = {
   es: {
     langLabel: 'ES',
     otherLangLabel: 'EN',
-    langGroupLabel: 'Idioma',
+    langToggleLabel: (en) => (en ? 'Cambiar a español' : 'Cambiar a inglés'),
     themeToggleLabel: (dark) => (dark ? 'Pasar a modo claro' : 'Pasar a modo oscuro'),
     repo: { owner: 'perfil', name: 'portfolio', branch: 'main', file: 'README.md' },
     commitsLabel: (n) => `${n} commits`,
@@ -109,7 +109,7 @@ export const content = {
   en: {
     langLabel: 'EN',
     otherLangLabel: 'ES',
-    langGroupLabel: 'Language',
+    langToggleLabel: (en) => (en ? 'Switch to English' : 'Switch to Spanish'),
     themeToggleLabel: (dark) => (dark ? 'Switch to light mode' : 'Switch to dark mode'),
     repo: { owner: 'profile', name: 'portfolio', branch: 'main', file: 'README.md' },
     commitsLabel: (n) => `${n} commits`,

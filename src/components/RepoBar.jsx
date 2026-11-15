@@ -42,19 +42,22 @@ export function RepoBar({ t, lang, onLanguageChange, commitCount, theme, onTheme
 
       <div className="bar__spacer" />
 
-      <div className="lang" role="group" aria-label={t.langGroupLabel}>
-        {['es', 'en'].map((code) => (
-          <button
-            key={code}
-            type="button"
-            className="lang__btn"
-            aria-pressed={lang === code}
-            onClick={() => onLanguageChange(code)}
-          >
-            {code.toUpperCase()}
-          </button>
-        ))}
-      </div>
+      {/* Conmutador de idioma: un solo botón de dos caras, todo el pill clicable */}
+      <button
+        type="button"
+        className="switch switch--lang"
+        data-lang={lang}
+        aria-label={t.langToggleLabel(lang === 'en')}
+        onClick={() => onLanguageChange(lang === 'en' ? 'es' : 'en')}
+      >
+        <span className="switch__face" data-face="es" aria-hidden="true">
+          ES
+        </span>
+        <span className="switch__face" data-face="en" aria-hidden="true">
+          EN
+        </span>
+        <span className="switch__thumb" aria-hidden="true" />
+      </button>
 
       <button
         type="button"
