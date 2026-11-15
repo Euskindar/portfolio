@@ -84,6 +84,17 @@
   --del-bg: #fbe7e2;
   --del-ink: #8a2f1a;
 
+  /* Derivados: tinta sobre color sólido, hover verde, trazos de control
+     y el gris de nodos pendientes */
+  --on-accent: #ffffff;
+  --green-strong: #245f45;
+  --rule-strong: #b9b7ae;
+  --rule-dash: #c3c1b8;
+  --blueprint: #9a9d96;
+
+  /* Estado del conmutador de tema */
+  --switch-shift: 0;
+
   /* Tipografía */
   --font-display: 'Archivo', 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
   --font-mono: 'Azeret Mono', ui-monospace, 'SF Mono', 'Cascadia Mono', 'Segoe UI Mono', Menlo,
@@ -114,6 +125,82 @@
   color: var(--ink);
   background-color: var(--paper);
   scroll-padding-top: calc(var(--bar-h) + 1.5rem);
+}
+
+/* Estrato oscuro del mismo mundo: papel grafito, tinta cálida y acentos
+   aclarados para mantener AA sobre fondo oscuro. Línea heredada de
+   euskindar.github.io. Se declara dos veces: una para seguir al sistema sin
+   JS y otra para el override manual. Mantén ambos bloques sincronizados. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --paper: #161712;
+    --paper-sunk: #101109;
+    --surface: #1b1c15;
+
+    --ink: #f2f0ea;
+    --ink-dim: #c9c7bd;
+    --ink-soft: #a9a79d;
+    --ink-faint: #8b8980;
+
+    --rule: #33342c;
+    --rule-soft: #26271f;
+    --rule-strong: #4a4b43;
+    --rule-dash: #3f4038;
+
+    --blue: #6f9bff;
+    --green: #4fbb8b;
+    --orange: #ff7a52;
+    --orange-ink: #ff9a78;
+
+    --on-accent: #0e0f0b;
+    --green-strong: #6acb9f;
+    --blueprint: #5c5e54;
+
+    /* Diff: tintes hundidos con tinta aclarada, tinta de revisión igual que en claro */
+    --add-bg: #1a2c22;
+    --add-ink: #6acb9f;
+    --del-bg: #2c1b14;
+    --del-ink: #ff9a78;
+
+    --switch-shift: 100%;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --paper: #161712;
+  --paper-sunk: #101109;
+  --surface: #1b1c15;
+
+  --ink: #f2f0ea;
+  --ink-dim: #c9c7bd;
+  --ink-soft: #a9a79d;
+  --ink-faint: #8b8980;
+
+  --rule: #33342c;
+  --rule-soft: #26271f;
+  --rule-strong: #4a4b43;
+  --rule-dash: #3f4038;
+
+  --blue: #6f9bff;
+  --green: #4fbb8b;
+  --orange: #ff7a52;
+  --orange-ink: #ff9a78;
+
+  --on-accent: #0e0f0b;
+  --green-strong: #6acb9f;
+  --blueprint: #5c5e54;
+
+  /* Diff: tintes hundidos con tinta aclarada, tinta de revisión igual que en claro */
+  --add-bg: #1a2c22;
+  --add-ink: #6acb9f;
+  --del-bg: #2c1b14;
+  --del-ink: #ff9a78;
+
+  --switch-shift: 100%;
 }
 
 *,
@@ -183,7 +270,7 @@ button {
 
 ::selection {
   background: var(--blue);
-  color: #fff;
+  color: var(--on-accent);
 }
 
 .visually-hidden {

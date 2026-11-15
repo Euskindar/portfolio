@@ -60,7 +60,7 @@
   display: inline-flex;
   align-items: center;
   padding: 0.18rem 0.5rem;
-  border: 1px solid #b9b7ae;
+  border: 1px solid var(--rule-strong);
   border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -72,12 +72,12 @@
 .chip--main {
   background: var(--blue);
   border-color: var(--blue);
-  color: #fff;
+  color: var(--on-accent);
 }
 
 .lang {
   display: inline-flex;
-  border: 1px solid #b9b7ae;
+  border: 1px solid var(--rule-strong);
   border-radius: 999px;
   overflow: hidden;
 }
@@ -93,6 +93,95 @@
 .lang__btn[aria-pressed='true'] {
   background: var(--ink);
   color: var(--paper);
+}
+
+/* Conmutador de tema: pill de dos caras (cara activa sólida, inactiva fantasma).
+   El pulgar se desplaza con --switch-shift, que el estrato oscuro pone a 100%. */
+.switch {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  width: 50px;
+  height: 28px;
+  padding: 2px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  background: var(--paper-sunk);
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.switch:hover {
+  border-color: var(--ink-faint);
+}
+
+.switch__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  z-index: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ink);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.switch--theme .switch__thumb {
+  transform: translateX(var(--switch-shift, 0));
+}
+
+/* Cara inactiva: visible pero apagada, para que se sepa que hay otra opción */
+.switch__face {
+  position: absolute;
+  top: 2px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  color: var(--ink-dim);
+  opacity: 0.55;
+  transition:
+    opacity 0.12s ease,
+    color 0.12s ease;
+}
+
+.switch__face[data-face='light'] {
+  left: 2px;
+}
+
+.switch__face[data-face='dark'] {
+  left: 24px;
+}
+
+/* En claro la cara sólida es el sol; en oscuro, la luna */
+.switch--theme [data-face='light'] {
+  opacity: 1;
+  color: var(--paper);
+}
+
+:root[data-theme='dark'] .switch--theme [data-face='light'] {
+  opacity: 0.55;
+  color: var(--ink-dim);
+}
+
+:root[data-theme='dark'] .switch--theme [data-face='dark'] {
+  opacity: 1;
+  color: var(--paper);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .switch--theme [data-face='light'] {
+    opacity: 0.55;
+    color: var(--ink-dim);
+  }
+
+  :root:not([data-theme='light']) .switch--theme [data-face='dark'] {
+    opacity: 1;
+    color: var(--paper);
+  }
 }
 
 /* Estructura ------------------------------------------------------------- */
@@ -147,12 +236,14 @@
   bottom: 1.75rem;
   width: 2px;
   padding: 0;
-  background: rgba(36, 87, 214, 0.2);
+  background: color-mix(in srgb, var(--blue) 20%, transparent);
 }
 
 .rail__lane-fill {
   display: block;
   width: 100%;
+  /* El progreso lo escribe CommitRail vía CSSOM (la CSP no permite el atributo style=) */
+  height: var(--rail-progress, 0%);
   background: var(--blue);
   transition: height 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
@@ -189,7 +280,7 @@
 }
 
 .commit__dot--gray {
-  background: #9a9d96;
+  background: var(--blueprint);
 }
 
 .commit__hash {
@@ -231,7 +322,7 @@
 .commit[aria-current='true'] .commit__dot {
   box-shadow:
     0 0 0 3px var(--paper-sunk),
-    0 0 0 5px rgba(36, 87, 214, 0.35);
+    0 0 0 5px color-mix(in srgb, var(--blue) 35%, transparent);
 }
 
 /* Pista de la acción primaria, bajo los botones del hero */
@@ -329,19 +420,19 @@
 .btn--solid:hover {
   background: var(--blue);
   border-color: var(--blue);
-  color: #fff;
+  color: var(--on-accent);
 }
 
 .btn--contact {
   border-color: var(--green);
   background: var(--green);
-  color: #fff;
+  color: var(--on-accent);
 }
 
 .btn--contact:hover {
-  border-color: #245f45;
-  background: #245f45;
-  color: #fff;
+  border-color: var(--green-strong);
+  background: var(--green-strong);
+  color: var(--on-accent);
 }
 
 .btn--muted,
@@ -449,7 +540,7 @@
 
 .tag {
   padding: 0.18rem 0.5rem;
-  border: 1px solid #b9b7ae;
+  border: 1px solid var(--rule-strong);
   border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -513,7 +604,7 @@
 .pending {
   max-width: 46rem;
   padding: 1.5rem;
-  border: 1px dashed #c3c1b8;
+  border: 1px dashed var(--rule-dash);
   background: var(--paper-sunk);
 }
 
@@ -863,11 +954,11 @@
   }
 
   .commit[aria-current='true'] .commit__msg {
-    color: #fff;
+    color: var(--on-accent);
   }
 
   .commit[aria-current='true'] .commit__dot {
-    background: #fff;
+    background: var(--on-accent);
     box-shadow: none;
   }
 

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { content, links, sections } from './content'
+import { EuskindarTheme } from './theme'
 import { RepoBar } from './components/RepoBar'
 import { CommitRail } from './components/CommitRail'
 import { PendingPanel, ProjectCase, SectionHead } from './components/Sections'
-import './App.css'
 
 const LANG_KEY = 'portfolio:lang'
 const COMMIT_TYPE = Object.fromEntries(sections.map((section) => [section.id, section.type]))
@@ -33,6 +33,10 @@ export default function App() {
   const [activeId, setActiveId] = useState(sections[0].id)
   const [copied, setCopied] = useState(false)
   const copyTimer = useRef(null)
+  // El tema inicial lo fija public/boot.js en <html>; aquí solo se lee para el estado.
+  const [theme, setTheme] = useState(() =>
+    document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light',
+  )
 
   const t = content[lang]
   const activeIndex = Math.max(
@@ -75,6 +79,7 @@ export default function App() {
   useEffect(() => () => clearTimeout(copyTimer.current), [])
 
   const changeLanguage = (next) => setLang(next)
+  const toggleTheme = () => setTheme(EuskindarTheme.toggle())
 
   const copyEmail = async () => {
     try {
@@ -111,6 +116,8 @@ export default function App() {
         lang={lang}
         onLanguageChange={changeLanguage}
         commitCount={sections.length}
+        theme={theme}
+        onThemeChange={toggleTheme}
       />
 
       <div className="shell">

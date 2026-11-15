@@ -140,7 +140,7 @@ Tres roles semánticos, no decorativos. Un color aquí significa algo fijo en to
 
 **Diff:** `#e5f1e8`/`#1f5b3e` para añadidos y `#fbe7e2`/`#8a2f1a` para eliminados. Tintes suaves, nunca saturados: se leen como tinta de revisión, no como alertas.
 
-Sin modo oscuro: el papel es una decisión, no un tema.
+Con modo oscuro: el papel es una decisión, pero el tema completo es invertido cuando se activa. Es el estrato oscuro heredado de `euskindar.github.io`: papel grafito `#161712`, hundido `#101109`, superficie de panel `#1b1c15`; tinta cálida `#f2f0ea` con niveles `ink-dim #c9c7bd`, `ink-soft #a9a79d`, `ink-faint #8b8980` (todos ≥ 4.5:1 sobre grafito); reglas `#33342c`/`#26271f` y trazos de control `#4a4b43`/`#3f4038`. Los acentos se aclaran para mantener AA sobre fondo oscuro: azul `#6f9bff`, verde `#4fbb8b`, naranja `#ff7a52` con `orange-ink #ff9a78`. La tinta sobre color sólido pasa a oscura (`on-accent #0e0f0b`), el hover verde a `#6acb9f` y el gris de nodos pendientes a `#5c5e54`. Los diff se hunden en vez de aclararse: `#1a2c22`/`#6acb9f` para añadidos y `#2c1b14`/`#ff9a78` para eliminados. El conmutador es una pill de dos caras (sol/luna dibujados; cara activa sólida, inactiva fantasma) y el estado viaja en `data-theme` en `<html>`, con `?theme=`, `localStorage` y `prefers-color-scheme` como prioridad.
 
 ## Typography
 

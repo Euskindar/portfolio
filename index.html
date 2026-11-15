@@ -1,10 +1,13 @@
 <!doctype html>
 <html lang="es">
   <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'self'; form-action 'none';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f7f6f2" />
+    <meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161712" media="(prefers-color-scheme: dark)" />
     <meta
       name="description"
       content="Perfil híbrido de desarrollo de software y soporte técnico de hardware. Proyectos, trayectoria y contacto, con evidencia real."
@@ -17,7 +20,11 @@
       crossorigin
     />
     <title>Perfil híbrido — software y hardware</title>
-  </head>
+    <!-- CSS por <link>, no importado desde JS: la CSP (style-src 'self') bloquea los <style> que Vite inyecta en dev -->
+    <link rel="stylesheet" href="/src/index.css" />
+    <link rel="stylesheet" href="/src/App.css" />
+  <script src="/boot.js" defer></script>
+</head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

@@ -8,21 +8,24 @@ La home es una superficie única: un perfil de repositorio con seis secciones an
 
 ## Runtime flow
 
-1. `index.html` carga `/src/main.jsx` en `#root`.
-2. `main.jsx` importa `src/index.css` y monta `<App />` en `<StrictMode>`.
-3. `App.jsx` resuelve el idioma (`?lang=` → `localStorage` → `es`), renderiza la barra, el rail y las seis secciones.
-4. Un `IntersectionObserver` sigue la sección visible y actualiza `activeId`; el rail refleja progreso y estado activo con `aria-current`.
-5. El cambio de idioma actualiza `content[lang]`, `document.documentElement.lang` y `document.title`, y guarda la preferencia.
+1. `index.html` carga `/boot.js` (`defer`) y `/src/main.jsx` en `#root`.
+2. `boot.js` pre-pinta el tema en `<html>` antes del primer render: `?theme=` → `localStorage 'portfolio:theme'` → `prefers-color-scheme`, y sincroniza los metas `theme-color` (sin CSS inyectado; los tokens viven en `src/index.css`).
+3. `index.html` carga `src/index.css` y `src/App.css` por `<link>` (compatible con la CSP) y `main.jsx` monta `<App />` en `<StrictMode>`.
+4. `App.jsx` resuelve el idioma (`?lang=` → `localStorage` → `es`) y el tema (lee `data-theme` de `<html>`), renderiza la barra, el rail y las seis secciones.
+5. Un `IntersectionObserver` sigue la sección visible y actualiza `activeId`; el rail refleja progreso y estado activo con `aria-current` (el progreso se escribe como custom property vía CSSOM por la CSP).
+6. El cambio de idioma actualiza `content[lang]`, `document.documentElement.lang` y `document.title`, y guarda la preferencia. El conmutador de tema llama a `EuskindarTheme.toggle()` (`src/theme.js`), que alterna `data-theme`, persiste en `localStorage` y sincroniza los metas.
 
 ## File map
 
 | Path | Responsibility |
 | --- | --- |
-| `index.html` | Entrada HTML: `#root`, metadatos, favicon y preload de fuente |
+| `index.html` | Entrada HTML: CSP, `#root`, `<link>` a las dos hojas CSS, metadatos, dos metas `theme-color` con media, favicon y preload de fuente |
+| `public/boot.js` | Pre-pintado del tema en `<html>` antes del primer render; compartición de estado con `src/theme.js` |
 | `src/main.jsx` | Raíz React, `StrictMode`, import del CSS global |
-| `src/App.jsx` | Composición de la página, idioma, observador de sección activa, copia de email |
+| `src/App.jsx` | Composición de la página, idioma, tema (estado local), observador de sección activa, copia de email |
+| `src/theme.js` | `EuskindarTheme`: alterna `data-theme`, persiste la preferencia y sincroniza los metas `theme-color` |
 | `src/content.js` | Única fuente de contenido ES/EN, `links` (email, GitHub, LinkedIn, CV) y `sections` (id, hash, tipo, nodo) |
-| `src/components/RepoBar.jsx` | Barra de repositorio y conmutador ES/EN |
+| `src/components/RepoBar.jsx` | Barra de repositorio, conmutador ES/EN y switch de tema (pill de dos caras con SVG) |
 | `src/components/CommitRail.jsx` | Grafo/índice de commits con carril de progreso |
 | `src/components/Sections.jsx` | `SectionHead`, `PendingPanel`, `ProjectCase` |
 | `src/App.css` | Estilos de estructura y componentes |
