@@ -1,0 +1,2 @@
+# El hook pre-push debe conservar LF para funcionar en sh
+.githooks/** text eol=lf

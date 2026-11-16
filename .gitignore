@@ -30,3 +30,6 @@ AGENTS.md
 # Impeccable design artifacts (keep the shared config)
 .impeccable/*
 !.impeccable/config.json
+
+# Open Code Review output
+review.json

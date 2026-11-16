@@ -1,0 +1,59 @@
+#!/bin/sh
+# Gate pre-push: OCR review antes de push a main.
+# Activación: git config core.hooksPath .githooks
+# Escape: git push --no-verify (omite este gate)
+# Dry-run (no ejecuta OCR ni prompt): OCR_HOOK_DRY_RUN=1
+
+zero=0000000000000000000000000000000000000000
+
+# Endpoint del LLM local (override con variables de entorno si cambia)
+: "${OCR_LLM_URL:=http://localhost:8081}"
+: "${OCR_LLM_TOKEN:=dummy}"
+: "${OCR_LLM_MODEL:=Qwen3.5-9B-Q4_K_M}"
+export OCR_LLM_URL OCR_LLM_TOKEN OCR_LLM_MODEL
+
+# Solo actúa si algún ref remoto destino es refs/heads/main
+gate=0
+while read -r _local_ref local_sha remote_ref remote_sha; do
+  case "$remote_ref" in
+    refs/heads/main) gate=1; to_sha="$local_sha"; from_sha="$remote_sha" ;;
+  esac
+done
+
+[ "$gate" -eq 1 ] || exit 0
+
+# Borrado de main o primer push sin ref base: no hay rango que revisar
+if [ "$to_sha" = "$zero" ]; then
+  echo "pre-push: borrado de main; gate OCR omitido." >&2
+  exit 0
+fi
+if [ "$from_sha" = "$zero" ]; then
+  echo "pre-push: primer push a main (sin base remota); gate OCR omitido." >&2
+  exit 0
+fi
+
+if [ "${OCR_HOOK_DRY_RUN:-0}" = "1" ]; then
+  echo "pre-push [dry-run]: OCR review --from $from_sha --to $to_sha (modelo $OCR_LLM_MODEL)"
+  exit 0
+fi
+
+# Confirmación interactiva (si no hay terminal, corre igual: fail-safe)
+answer=""
+if { printf 'Push a main: ¿ejecutar OCR review del rango a subir? [S/n] ' && read answer; } < /dev/tty > /dev/tty 2>/dev/null; then
+  case "$answer" in
+    n*|N*)
+      echo "pre-push: OCR review omitido manualmente — push continúa SIN revisión." >&2
+      exit 0
+      ;;
+  esac
+fi
+
+echo "pre-push: ejecutando OCR review ($from_sha..$to_sha) con $OCR_LLM_MODEL..." >&2
+if ocr review --from "$from_sha" --to "$to_sha" --format json --output review.json; then
+  echo "pre-push: OCR review completado — push permitido." >&2
+  exit 0
+else
+  echo "pre-push: OCR review FALLÓ — push a main BLOQUEADO." >&2
+  echo "  Detalles en review.json. Para forzar el push: git push --no-verify" >&2
+  exit 1
+fi
