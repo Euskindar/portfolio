@@ -12,6 +12,28 @@ zero=0000000000000000000000000000000000000000
 : "${OCR_LLM_MODEL:=Qwen3.5-9B-Q4_K_M}"
 export OCR_LLM_URL OCR_LLM_TOKEN OCR_LLM_MODEL
 
+# El wrapper `ocr` de npm solo resuelve rutas correctamente bajo sh de MSYS
+# (Git Bash). Desde WSL/Linux se invoca vía interop de Windows.
+ocr_review() {
+  case "$(uname -s)" in
+    MINGW*|MSYS*|CYGWIN*|Darwin*)
+      ocr review "$@"
+      ;;
+    Linux*)
+      if command -v cmd.exe >/dev/null 2>&1; then
+        cmd.exe /C ocr.cmd review "$@"
+      else
+        echo "pre-push: no hay runner de OCR para este entorno ($(uname -s)); haz el push desde Git Bash de Windows." >&2
+        return 127
+      fi
+      ;;
+    *)
+      echo "pre-push: entorno no soportado por el gate OCR ($(uname -s))." >&2
+      return 127
+      ;;
+  esac
+}
+
 # Solo actúa si algún ref remoto destino es refs/heads/main
 gate=0
 while read -r _local_ref local_sha remote_ref remote_sha; do
@@ -49,7 +71,7 @@ if { printf 'Push a main: ¿ejecutar OCR review del rango a subir? [S/n] ' && re
 fi
 
 echo "pre-push: ejecutando OCR review ($from_sha..$to_sha) con $OCR_LLM_MODEL..." >&2
-if ocr review --from "$from_sha" --to "$to_sha" --format json --output review.json; then
+if ocr_review --from "$from_sha" --to "$to_sha" --format json --output review.json; then
   echo "pre-push: OCR review completado — push permitido." >&2
   exit 0
 else
