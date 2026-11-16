@@ -29,10 +29,12 @@ runner_ok() {
   case "$(uname -s)" in
     MINGW*|MSYS*|CYGWIN*|Darwin*)
       command -v ocr >/dev/null 2>&1 || abort "'ocr' no está en PATH; instala con: npm i -g @alibaba-group/open-code-review"
+      ocr --version >/dev/null 2>&1 || abort "'ocr' está en PATH pero no responde (--version falló)"
       ;;
     Linux*)
       command -v cmd.exe >/dev/null 2>&1 || abort "no hay cmd.exe (interop Windows) para invocar OCR; haz el push desde Git Bash de Windows"
       cmd.exe /C where ocr.cmd >/dev/null 2>&1 || abort "'ocr.cmd' no está disponible en el PATH de Windows; instala @alibaba-group/open-code-review global"
+      cmd.exe /C ocr.cmd --version >/dev/null 2>&1 || abort "'ocr.cmd' existe pero no responde (--version falló)"
       ;;
     *)
       abort "entorno no soportado por el gate OCR ($(uname -s))"
@@ -51,12 +53,22 @@ run_ocr_review() {
 # Imprime cada hallazgo para que se vea el motivo del bloqueo.
 judge_review_json() {
   command -v node >/dev/null 2>&1 || { echo "pre-push: 'node' no disponible; no puedo evaluar review.json" >&2; return 1; }
+  node --version >/dev/null 2>&1 || { echo "pre-push: 'node' está instalado pero no funciona" >&2; return 1; }
+  [ -f review.json ] || { echo "pre-push: OCR no generó review.json; push abortado" >&2; return 1; }
   node -e '
     const fs = require("fs");
+    let raw;
+    try { raw = fs.readFileSync("review.json", "utf8"); }
+    catch (e) { console.error("pre-push: no puedo leer review.json: " + e.message); process.exit(2); }
+    if (!raw.trim()) { console.error("pre-push: review.json vacio; push abortado."); process.exit(2); }
     let j;
-    try { j = JSON.parse(fs.readFileSync("review.json", "utf8")); }
-    catch (e) { console.error("pre-push: review.json ilegible: " + e.message); process.exit(2); }
-    const n = (j.summary && j.summary.comments) || 0;
+    try { j = JSON.parse(raw); }
+    catch (e) { console.error("pre-push: review.json no es JSON valido: " + e.message); process.exit(2); }
+    if (!j || typeof j !== "object" || !j.summary) {
+      console.error("pre-push: review.json sin summary; push abortado.");
+      process.exit(2);
+    }
+    const n = j.summary.comments || 0;
     if (j.status !== "complete") {
       console.error("pre-push: OCR termino con status=" + j.status + " - push abortado.");
       process.exit(1);
@@ -106,7 +118,9 @@ runner_ok
 answer=""
 if { printf 'Push a main (gate duro): ejecutar OCR review del rango a subir? [S/n] ' && read answer; } < /dev/tty > /dev/tty 2>/dev/null; then
   case "$answer" in
+    ""|s*|S*|y*|Y*) : ;;
     n*|N*) abort "revision OCR obligatoria para push a main (respondiste '$answer'); usa --no-verify para forzar." ;;
+    *) abort "respuesta no reconocida ('$answer'); revision obligatoria: reintenta el push y responde S o n." ;;
   esac
 elif [ "${OCR_PUSH_CONFIRM:-0}" != "1" ]; then
   abort "sin terminal para el prompt y sin OCR_PUSH_CONFIRM=1: falta confirmar el uso de OCR."
