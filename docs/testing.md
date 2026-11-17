@@ -2,15 +2,19 @@
 
 ## Current state
 
-No hay suite automatizada, runner ni script `test`. `package.json` expone `dev`, `build`, `lint`, `preview`, `postinstall` y `security:audit`.
+Hay suite automatizada con **Vitest 5 + Testing Library** (jsdom): script `test` (`vitest`, watch) y `npx vitest run` (una pasada). `package.json` expone `dev`, `build`, `lint`, `preview`, `test`, `audit:a11y`, `gwd:audit`, `postinstall`, `security:audit` y `review`.
 
-Las comprobaciones reales de esta superficie son: lint, build, detector de UI contra el navegador y smoke test manual. No afirmar que «los tests pasan»: no existen.
+Los tests se ejecutan en CI (`.github/workflows/ci.yml`): `npm run lint` → `npx vitest run` → `npm run build` → `npm run security:audit`.
+
+Las comprobaciones reales de esta superficie son: tests, lint, build, detector de UI contra el navegador y smoke test manual.
 
 ## Standard checks
 
 Desde la raíz del repositorio:
 
 ```bash
+npm test          # Vitest en watch (desarrollo)
+npx vitest run    # una pasada, como en CI
 npm run lint      # ESLint 9, JS/JSX, ignora dist
 npm run build     # build de producción; detecta imports y bundling
 ```
@@ -50,9 +54,16 @@ Repetir con `--window-size=492,900` en otro puerto (`9223`) para el pase estrech
 
 Criterio de cierre: 0 hallazgos primarios en ambos pases. Los avisos (advisory) no bloquean.
 
-## When automated tests are added
+## Automated tests
 
-1. Añadir el runner y un script `test` a `package.json`; actualizar el lockfile con `npm install`.
-2. Fijar una convención de ubicación (colocados junto al código o `src/__tests__/`) y documentarla aquí.
-3. Sustituir la frase «no hay tests» por el comando de la suite completa y de un fichero concreto.
-4. Actualizar esta guía y `docs/architecture.md` si cambia el orden de verificación obligatorio.
+Convención actual:
+
+- Ubicación: `src/__tests__/`, ficheros `*.test.jsx`.
+- Entorno: jsdom (`vitest.config.ts`) con `setupTests.js`, que stubbea `IntersectionObserver` (lo usan el rail y el observer de secciones).
+- Se asertan textos reales renderizados por la UI; el test smoke actual (`App.test.jsx`) cubre que `App` renderiza (matchea `portfolio` en la RepoBar, `content.js` → `repo.name`).
+
+Al añadir tests nuevos:
+
+1. Reutilizar el entorno jsdom y los stubs de `setupTests.js`; no duplicar stubs por fichero.
+2. Mantener `npx vitest run` en verde antes de commitear (CI lo ejecuta y bloquea el merge).
+3. Actualizar esta guía y `docs/architecture.md` si cambia el orden de verificación obligatorio.
