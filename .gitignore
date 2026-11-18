@@ -24,7 +24,6 @@ dist-ssr
 *.sw?
 
 # Local agent and editor config (not shared)
-AGENTS.md
 .opencode/
 
 # Impeccable design artifacts (keep the shared config)
