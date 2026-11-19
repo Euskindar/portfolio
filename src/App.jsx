@@ -124,7 +124,8 @@ export default function App() {
         <CommitRail t={t} sections={sections} activeId={activeId} progress={progress} />
 
         <main className="doc">
-          <section id="perfil" className="hero" aria-labelledby="perfil-title">
+          <div className="doc__inner">
+            <section id="perfil" className="hero" aria-labelledby="perfil-title">
             <p className="hero__path">
               <span>{t.hero.path}</span>
               <span className="hero__path-sep" aria-hidden="true">
@@ -332,6 +333,7 @@ export default function App() {
               </a>
             </footer>
           </section>
+          </div>
         </main>
       </div>
     </div>

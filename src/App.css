@@ -2,6 +2,8 @@
 
 .app {
   min-height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
   background: var(--paper);
 }
 
@@ -192,14 +194,19 @@
   display: grid;
   grid-template-columns: var(--rail-w) minmax(0, 1fr);
   align-items: start;
+  height: 100dvh;
 }
 
 .doc {
   padding: clamp(1.75rem, 1rem + 2.4vw, 2.75rem) var(--pad-x) 0;
-  max-width: 82rem;
   scroll-snap-type: y proximity;
   overflow-y: auto;
   height: 100dvh;
+}
+
+.doc__inner {
+  max-width: 82rem;
+  margin: 0 auto;
 }
 
 .doc section {
@@ -1020,6 +1027,13 @@
   }
 
   /* Scroll-driven desactivado en móvil: scroll normal y accesible */
+  html, body, #root, .app {
+    overflow: visible;
+    height: auto;
+  }
+  .shell {
+    height: auto;
+  }
   .doc {
     scroll-snap-type: none;
     overflow-y: visible;

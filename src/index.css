@@ -211,6 +211,8 @@
 
 html {
   scroll-behavior: smooth;
+  height: 100dvh;
+  overflow: hidden;
 }
 
 body {
@@ -219,6 +221,13 @@ body {
   background: var(--paper);
   color: var(--ink);
   line-height: 1.5;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+#root {
+  height: 100dvh;
+  overflow: hidden;
 }
 
 h1,
