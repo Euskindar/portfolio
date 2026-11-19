@@ -76,6 +76,23 @@ export function RepoBar({ t, lang, onLanguageChange, commitCount, theme, onTheme
         </span>
       </button>
 
+      <button
+        type="button"
+        className="switch switch--theme"
+        role="switch"
+        aria-checked={isDark}
+        aria-label={t.themeToggleLabel(isDark)}
+        onClick={onThemeChange}
+      >
+        <span className="switch__thumb" aria-hidden="true" />
+        <span className="switch__face" data-face="light" aria-hidden="true">
+          <ThemeGlyph variant="sun" />
+        </span>
+        <span className="switch__face" data-face="dark" aria-hidden="true">
+          <ThemeGlyph variant="moon" />
+        </span>
+      </button>
+
       <span className="bar__file">{t.repo.file}</span>
     </header>
   )
