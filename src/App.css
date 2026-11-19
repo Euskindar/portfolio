@@ -199,7 +199,6 @@
 
 .doc {
   padding: clamp(1.75rem, 1rem + 2.4vw, 2.75rem) var(--pad-x) 0;
-  scroll-snap-type: y proximity;
   overflow-y: auto;
   height: 100dvh;
   scroll-timeline: --doc-scroll block;
@@ -213,7 +212,6 @@
 .doc section {
   scroll-margin-top: calc(var(--bar-h) + 1.5rem);
   height: 100dvh;
-  scroll-snap-align: start;
 }
 
 /* Scroll-driven animations (raíl de commits, secciones y barra de lectura).
