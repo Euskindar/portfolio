@@ -75,23 +75,25 @@
   color: var(--on-accent);
 }
 
-.lang {
-  display: inline-flex;
-  border: 1px solid var(--rule-strong);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.lang__btn {
-  padding: 0.15rem 0.5rem;
+/* Idioma: caras de texto; el pulgar se desplaza según data-lang del propio botón */
+.switch--lang .switch__face {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.1em;
-  color: var(--ink-soft);
+  letter-spacing: 0.05em;
 }
 
-.lang__btn[aria-pressed='true'] {
-  background: var(--ink);
+.switch--lang[data-lang='es'] .switch__thumb {
+  transform: translateX(0);
+}
+
+.switch--lang[data-lang='en'] .switch__thumb {
+  transform: translateX(100%);
+}
+
+/* Cara activa sólida; inactiva fantasma */
+.switch--lang[data-lang='es'] [data-face='es'],
+.switch--lang[data-lang='en'] [data-face='en'] {
+  opacity: 1;
   color: var(--paper);
 }
 
