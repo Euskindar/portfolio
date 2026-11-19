@@ -39,11 +39,6 @@ export default function App() {
   )
 
   const t = content[lang]
-  const activeIndex = Math.max(
-    0,
-    sections.findIndex((section) => section.id === activeId),
-  )
-  const progress = ((activeIndex + 1) / sections.length) * 100
 
   useEffect(() => {
     document.documentElement.lang = lang
@@ -120,8 +115,10 @@ export default function App() {
         onThemeChange={toggleTheme}
       />
 
+      <div className="reading-progress" aria-hidden="true" />
+
       <div className="shell">
-        <CommitRail t={t} sections={sections} activeId={activeId} progress={progress} />
+        <CommitRail t={t} sections={sections} activeId={activeId} />
 
         <main className="doc">
           <div className="doc__inner">

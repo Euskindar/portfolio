@@ -84,17 +84,17 @@
   letter-spacing: 0.05em;
 }
 
-.switch--lang[data-lang='es'] .switch__thumb {
+.switch--lang[data-lang="es"] .switch__thumb {
   transform: translateX(0);
 }
 
-.switch--lang[data-lang='en'] .switch__thumb {
+.switch--lang[data-lang="en"] .switch__thumb {
   transform: translateX(100%);
 }
 
 /* Cara activa sólida; inactiva fantasma */
-.switch--lang[data-lang='es'] [data-face='es'],
-.switch--lang[data-lang='en'] [data-face='en'] {
+.switch--lang[data-lang="es"] [data-face="es"],
+.switch--lang[data-lang="en"] [data-face="en"] {
   opacity: 1;
   color: var(--paper);
 }
@@ -152,37 +152,37 @@
     color 0.12s ease;
 }
 
-.switch__face[data-face='light'] {
+.switch__face[data-face="light"] {
   left: 2px;
 }
 
-.switch__face[data-face='dark'] {
+.switch__face[data-face="dark"] {
   left: 24px;
 }
 
 /* En claro la cara sólida es el sol; en oscuro, la luna */
-.switch--theme [data-face='light'] {
+.switch--theme [data-face="light"] {
   opacity: 1;
   color: var(--paper);
 }
 
-:root[data-theme='dark'] .switch--theme [data-face='light'] {
+:root[data-theme="dark"] .switch--theme [data-face="light"] {
   opacity: 0.55;
   color: var(--ink-dim);
 }
 
-:root[data-theme='dark'] .switch--theme [data-face='dark'] {
+:root[data-theme="dark"] .switch--theme [data-face="dark"] {
   opacity: 1;
   color: var(--paper);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .switch--theme [data-face='light'] {
+  :root:not([data-theme="light"]) .switch--theme [data-face="light"] {
     opacity: 0.55;
     color: var(--ink-dim);
   }
 
-  :root:not([data-theme='light']) .switch--theme [data-face='dark'] {
+  :root:not([data-theme="light"]) .switch--theme [data-face="dark"] {
     opacity: 1;
     color: var(--paper);
   }
@@ -202,6 +202,7 @@
   scroll-snap-type: y proximity;
   overflow-y: auto;
   height: 100dvh;
+  scroll-timeline: --doc-scroll block;
 }
 
 .doc__inner {
@@ -213,6 +214,102 @@
   scroll-margin-top: calc(var(--bar-h) + 1.5rem);
   height: 100dvh;
   scroll-snap-align: start;
+}
+
+/* Scroll-driven animations (raíl de commits, secciones y barra de lectura).
+   Todo usa el timeline --doc-scroll o view(). Sin soporte, se ven estáticos. */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Carril de progreso del rail: línea que avanza con el scroll vertical del doc */
+  .rail__lane-fill {
+    animation: rail-fill linear both;
+    animation-timeline: --doc-scroll;
+    animation-range: 0% 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+    background: var(--blue);
+  }
+
+  @keyframes rail-fill {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+  }
+
+  /* Barra de progreso de lectura: crece de izquierda a derecha con el scroll */
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--blue);
+    transform: scaleX(0);
+    transform-origin: left center;
+    z-index: 40;
+    animation: expand linear both;
+    animation-timeline: --doc-scroll;
+    animation-range: 0% 100%;
+  }
+
+  @keyframes expand {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  /* Fade in/out de cada sección al entrar y salir del viewport */
+  .doc section {
+    animation: fade-in linear both, fade-out linear both;
+    animation-timeline: view(), view();
+    animation-range: entry 0% 40%, exit 60% 100%;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fade-out {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-10px); }
+  }
+
+  /* Todos los commits inactivos están opacos; solo el activo brilla */
+  .commit {
+    opacity: 0.55;
+  }
+
+  .commit__dot {
+    transform: scale(0.7);
+    transition: transform 0.2s ease;
+  }
+
+  .commit__hash,
+  .commit__msg,
+  .commit__sub {
+    opacity: 0.6;
+    transition: opacity 0.2s ease, color 0.2s ease;
+  }
+
+  /* Commit activo: dot mayor, texto intenso */
+  .commit[aria-current='true'] {
+    opacity: 1;
+  }
+
+  .commit[aria-current='true'] .commit__dot {
+    transform: scale(1.15);
+    box-shadow:
+      0 0 0 3px var(--paper-sunk),
+      0 0 0 6px color-mix(in srgb, var(--blue) 35%, transparent);
+  }
+
+  .commit[aria-current='true'] .commit__msg {
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .commit[aria-current='true'] .commit__hash {
+    color: var(--ink);
+  }
 }
 
 /* Rail de commits -------------------------------------------------------- */
@@ -251,15 +348,6 @@
   width: 2px;
   padding: 0;
   background: color-mix(in srgb, var(--blue) 20%, transparent);
-}
-
-.rail__lane-fill {
-  display: block;
-  width: 100%;
-  /* El progreso lo escribe CommitRail vía CSSOM (la CSP no permite el atributo style=) */
-  height: var(--rail-progress, 0%);
-  background: var(--blue);
-  transition: height 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .rail__list {
@@ -324,16 +412,16 @@
   color: var(--ink-soft);
 }
 
-.commit:where([data-passed='true']:not([aria-current='true'])) .commit__msg {
+.commit:where([data-passed="true"]:not([aria-current="true"])) .commit__msg {
   color: var(--ink-soft);
 }
 
 .commit:hover .commit__msg,
-.commit[aria-current='true'] .commit__msg {
+.commit[aria-current="true"] .commit__msg {
   color: var(--blue);
 }
 
-.commit[aria-current='true'] .commit__dot {
+.commit[aria-current="true"] .commit__dot {
   box-shadow:
     0 0 0 3px var(--paper-sunk),
     0 0 0 5px color-mix(in srgb, var(--blue) 35%, transparent);
@@ -349,7 +437,7 @@
 }
 
 .actions__hint::before {
-  content: '· ';
+  content: "· ";
   color: var(--blue);
 }
 
@@ -466,7 +554,7 @@
 }
 
 .btn__note::before {
-  content: '· ';
+  content: "· ";
   color: var(--ink-faint);
 }
 
@@ -515,7 +603,7 @@
 }
 
 .diff__line--add::before {
-  content: '+ ';
+  content: "+ ";
 }
 
 .diff__line--del {
@@ -524,7 +612,7 @@
 }
 
 .diff__line--del::before {
-  content: '− ';
+  content: "− ";
 }
 
 .branches {
@@ -962,16 +1050,16 @@
     align-items: center;
   }
 
-  .commit[aria-current='true'] {
+  .commit[aria-current="true"] {
     background: var(--blue);
     border-color: var(--blue);
   }
 
-  .commit[aria-current='true'] .commit__msg {
+  .commit[aria-current="true"] .commit__msg {
     color: var(--on-accent);
   }
 
-  .commit[aria-current='true'] .commit__dot {
+  .commit[aria-current="true"] .commit__dot {
     background: var(--on-accent);
     box-shadow: none;
   }
@@ -1027,7 +1115,10 @@
   }
 
   /* Scroll-driven desactivado en móvil: scroll normal y accesible */
-  html, body, #root, .app {
+  html,
+  body,
+  #root,
+  .app {
     overflow: visible;
     height: auto;
   }
