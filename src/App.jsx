@@ -49,8 +49,8 @@ export default function App() {
     document.documentElement.lang = lang
     document.title =
       lang === 'es'
-        ? 'Perfil híbrido — software y hardware'
-        : 'Hybrid profile — software and hardware'
+      ? 'Julen Pérez - Portfolio'
+      : 'Julen Pérez - Portfolio'
     try {
       localStorage.setItem(LANG_KEY, lang)
     } catch {

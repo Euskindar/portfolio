@@ -197,10 +197,15 @@
 .doc {
   padding: clamp(1.75rem, 1rem + 2.4vw, 2.75rem) var(--pad-x) 0;
   max-width: 82rem;
+  scroll-snap-type: y proximity;
+  overflow-y: auto;
+  height: 100dvh;
 }
 
 .doc section {
   scroll-margin-top: calc(var(--bar-h) + 1.5rem);
+  height: 100dvh;
+  scroll-snap-align: start;
 }
 
 /* Rail de commits -------------------------------------------------------- */
@@ -1012,5 +1017,16 @@
   .case__row {
     grid-template-columns: minmax(0, 1fr);
     gap: 0.2rem;
+  }
+
+  /* Scroll-driven desactivado en móvil: scroll normal y accesible */
+  .doc {
+    scroll-snap-type: none;
+    overflow-y: visible;
+    height: auto;
+  }
+  .doc section {
+    height: auto;
+    scroll-snap-align: none;
   }
 }
