@@ -195,6 +195,8 @@
   grid-template-columns: var(--rail-w) minmax(0, 1fr);
   align-items: start;
   height: 100dvh;
+  /* Exponer el timeline de scroll del .doc a los consumidores hermanos */
+  timeline-scope: --doc-scroll;
 }
 
 .doc {
@@ -214,7 +216,7 @@
   height: 100dvh;
 }
 
-/* Scroll-driven animations (raíl de commits, secciones y barra de lectura).
+/* Scroll-driven animations (raíl de commits y secciones).
    Todo usa el timeline --doc-scroll o view(). Sin soporte, se ven estáticos. */
 
 @media (prefers-reduced-motion: no-preference) {
@@ -223,42 +225,11 @@
     animation: rail-fill linear both;
     animation-timeline: --doc-scroll;
     animation-range: 0% 100%;
-    transform: scaleY(0);
-    transform-origin: top;
-    background: var(--blue);
   }
 
   @keyframes rail-fill {
-    from {
-      transform: scaleY(0);
-    }
     to {
       transform: scaleY(1);
-    }
-  }
-
-  /* Barra de progreso de lectura: crece de izquierda a derecha con el scroll */
-  .reading-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: var(--blue);
-    transform: scaleX(0);
-    transform-origin: left center;
-    z-index: 40;
-    animation: expand linear both;
-    animation-timeline: --doc-scroll;
-    animation-range: 0% 100%;
-  }
-
-  @keyframes expand {
-    from {
-      transform: scaleX(0);
-    }
-    to {
-      transform: scaleX(1);
     }
   }
 
@@ -269,8 +240,8 @@
       fade-out linear both;
     animation-timeline: view(), view();
     animation-range:
-      entry 0% 40%,
-      exit 60% 100%;
+      entry 0% 20%,
+      exit 30% 75%;
   }
 
   @keyframes fade-in {
@@ -278,17 +249,9 @@
       opacity: 0;
       transform: translateY(10px);
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   @keyframes fade-out {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
     to {
       opacity: 0;
       transform: translateY(-10px);
@@ -372,6 +335,19 @@
   width: 2px;
   padding: 0;
   background: color-mix(in srgb, var(--blue) 20%, transparent);
+}
+
+/* Relleno de progreso del rail: se posiciona sobre la pista y avanza con el scroll */
+.rail__lane-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleY(0);
+  transform-origin: top;
+  background: var(--blue);
 }
 
 .rail__list {

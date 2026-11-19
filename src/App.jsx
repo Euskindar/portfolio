@@ -115,8 +115,6 @@ export default function App() {
         onThemeChange={toggleTheme}
       />
 
-      <div className="reading-progress" aria-hidden="true" />
-
       <div className="shell">
         <CommitRail t={t} sections={sections} activeId={activeId} />
 
