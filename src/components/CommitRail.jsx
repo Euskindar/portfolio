@@ -1,16 +1,4 @@
-import { useLayoutEffect, useRef } from 'react'
-
-export function CommitRail({ t, sections, activeId, progress }) {
-  const fillRef = useRef(null)
-
-  // El progreso se escribe por CSSOM como custom property: la CSP prohíbe el
-  // atributo style=, pero no la manipulación de estilos desde JS.
-  useLayoutEffect(() => {
-    if (fillRef.current) {
-      fillRef.current.style.setProperty('--rail-progress', `${progress}%`)
-    }
-  }, [progress])
-
+export function CommitRail({ t, sections, activeId }) {
   return (
     <nav className="rail" aria-label={t.railTitle}>
       <p className="rail__title">{t.railTitle}</p>
@@ -18,7 +6,7 @@ export function CommitRail({ t, sections, activeId, progress }) {
 
       <ol className="rail__list">
         <li className="rail__lane" aria-hidden="true">
-          <span ref={fillRef} className="rail__lane-fill" />
+          <span className="rail__lane-fill" />
         </li>
         {sections.map((section, index) => {
           const entry = t.rail[index]

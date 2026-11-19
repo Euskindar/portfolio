@@ -229,8 +229,12 @@
   }
 
   @keyframes rail-fill {
-    from { transform: scaleY(0); }
-    to   { transform: scaleY(1); }
+    from {
+      transform: scaleY(0);
+    }
+    to {
+      transform: scaleY(1);
+    }
   }
 
   /* Barra de progreso de lectura: crece de izquierda a derecha con el scroll */
@@ -250,25 +254,45 @@
   }
 
   @keyframes expand {
-    from { transform: scaleX(0); }
-    to   { transform: scaleX(1); }
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
   }
 
   /* Fade in/out de cada sección al entrar y salir del viewport */
   .doc section {
-    animation: fade-in linear both, fade-out linear both;
+    animation:
+      fade-in linear both,
+      fade-out linear both;
     animation-timeline: view(), view();
-    animation-range: entry 0% 40%, exit 60% 100%;
+    animation-range:
+      entry 0% 40%,
+      exit 60% 100%;
   }
 
   @keyframes fade-in {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @keyframes fade-out {
-    from { opacity: 1; transform: translateY(0); }
-    to   { opacity: 0; transform: translateY(-10px); }
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
   }
 
   /* Todos los commits inactivos están opacos; solo el activo brilla */
@@ -285,27 +309,29 @@
   .commit__msg,
   .commit__sub {
     opacity: 0.6;
-    transition: opacity 0.2s ease, color 0.2s ease;
+    transition:
+      opacity 0.2s ease,
+      color 0.2s ease;
   }
 
   /* Commit activo: dot mayor, texto intenso */
-  .commit[aria-current='true'] {
+  .commit[aria-current="true"] {
     opacity: 1;
   }
 
-  .commit[aria-current='true'] .commit__dot {
+  .commit[aria-current="true"] .commit__dot {
     transform: scale(1.15);
     box-shadow:
       0 0 0 3px var(--paper-sunk),
       0 0 0 6px color-mix(in srgb, var(--blue) 35%, transparent);
   }
 
-  .commit[aria-current='true'] .commit__msg {
+  .commit[aria-current="true"] .commit__msg {
     color: var(--blue);
     font-weight: 700;
   }
 
-  .commit[aria-current='true'] .commit__hash {
+  .commit[aria-current="true"] .commit__hash {
     color: var(--ink);
   }
 }
