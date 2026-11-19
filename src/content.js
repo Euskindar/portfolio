@@ -2,7 +2,7 @@
 // Nada inventado: lo que falta se marca con `pending: true` y se muestra como pendiente.
 
 const github = 'https://github.com/Euskindar'
-const email = 'julenjph@gmail.com'
+const email = 'julenjph@hotmail.com'
 
 export const content = {
   es: {
@@ -10,7 +10,7 @@ export const content = {
     otherLangLabel: 'EN',
     langToggleLabel: (en) => (en ? 'Cambiar a español' : 'Cambiar a inglés'),
     themeToggleLabel: (dark) => (dark ? 'Pasar a modo claro' : 'Pasar a modo oscuro'),
-    repo: { owner: 'perfil', name: 'portfolio', branch: 'main', file: 'README.md' },
+    repo: { owner: 'JULEN PEREZ HERNANDEZ', name: 'portfolio', branch: 'main', file: 'README.md' },
     commitsLabel: (n) => `${n} commits`,
     railTitle: 'Grafo de commits',
     railHint: 'Cada sección es un commit',
@@ -111,7 +111,7 @@ export const content = {
     otherLangLabel: 'ES',
     langToggleLabel: (en) => (en ? 'Switch to English' : 'Switch to Spanish'),
     themeToggleLabel: (dark) => (dark ? 'Switch to light mode' : 'Switch to dark mode'),
-    repo: { owner: 'profile', name: 'portfolio', branch: 'main', file: 'README.md' },
+    repo: { owner: 'JULEN PEREZ HERNANDEZ', name: 'portfolio', branch: 'main', file: 'README.md' },
     commitsLabel: (n) => `${n} commits`,
     railTitle: 'Commit graph',
     railHint: 'Every section is a commit',

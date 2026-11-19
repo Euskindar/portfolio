@@ -5,6 +5,6 @@ import App from '../App.jsx';
 
 test('renders App component', () => {
   render(<App />);
-  const element = screen.getByText(/Portfolio/i);
+  const element = screen.getByText(/portfolio/i);
   expect(element).toBeInTheDocument();
 });
